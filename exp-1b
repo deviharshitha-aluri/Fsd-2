@@ -1,64 +1,63 @@
-import React, { useState } from &quot;react&quot;;
+import React, { useState } from "react";
 function Child({ user, onMessageSend }) {
-return (
-&lt;div style={styles.childBox}&gt;
-&lt;h3&gt;Child Component&lt;/h3&gt;
-&lt;p&gt;
-Received User: &lt;strong&gt;{user.name}&lt;/strong&gt; ({user.email})
-&lt;/p&gt;
-&lt;button
-onClick={() =&gt;
-onMessageSend(&quot;Hello Parent! This is a message from the child.&quot;)
-}
-&gt;
-Send Message to Parent
-&lt;/button&gt;
-&lt;/div&gt;
-);
+  return (
+    <div style={styles.childBox}>
+      <h3>Child Component</h3>
+      <p>
+        Received User: <strong>{user.name}</strong> ({user.email})
+      </p>
+      <button
+        onClick={() =>
+          onMessageSend("Hello Parent! This is a message from the child.")
+        }
+      >
+        Send Message to Parent
+      </button>
+    </div>
+  );
 }
 function Parent() {
-const [user] = useState({ name: &quot;prasanth&quot;, email: &quot;prasanth@gmail.com&quot; });
-const [messageFromChild, setMessageFromChild] = useState(&quot;&quot;);
-const handleChildMessage = (msg) =&gt; {
-setMessageFromChild(msg);
-};
-return (
-
-&lt;div style={styles.parentBox}&gt;
-&lt;h2&gt;Parent Component&lt;/h2&gt;
-&lt;p&gt;User Info is shared with the Child Component below:&lt;/p&gt;
-&lt;Child user={user} onMessageSend={handleChildMessage} /&gt;
-{messageFromChild &amp;&amp; (
-&lt;p style={{ marginTop: &quot;20px&quot;, color: &quot;green&quot; }}&gt;
-Message received from Child: &quot;{messageFromChild}&quot;
-&lt;/p&gt;
-)}
-&lt;/div&gt;
-);
+  const [user] = useState({ name: "prasanth", email: "prasanth@gmail.com" });
+  const [messageFromChild, setMessageFromChild] = useState("");
+  const handleChildMessage = (msg) => {
+    setMessageFromChild(msg);
+  };
+  return (
+    <div style={styles.parentBox}>
+      <h2>Parent Component</h2>
+      <p>User Info is shared with the Child Component below:</p>
+      <Child user={user} onMessageSend={handleChildMessage} />
+      {messageFromChild && (
+        <p style={{ marginTop: "20px", color: "green" }}>
+          Message received from Child: "{messageFromChild}"
+        </p>
+      )}
+    </div>
+  );
 }
 const styles = {
-parentBox: {
-border: &quot;2px solid #4CAF50&quot;,
-borderRadius: &quot;10px&quot;,
-padding: &quot;20px&quot;,
-margin: &quot;30px auto&quot;,
-width: &quot;400px&quot;,
-textAlign: &quot;center&quot;,
-},
-childBox: {
-border: &quot;1px solid #888&quot;,
-borderRadius: &quot;8px&quot;,
-padding: &quot;15px&quot;,
-marginTop: &quot;15px&quot;,
-},
+  parentBox: {
+    border: "2px solid #4CAF50",
+    borderRadius: "10px",
+    padding: "20px",
+    margin: "30px auto",
+    width: "400px",
+    textAlign: "center",
+  },
+  childBox: {
+    border: "1px solid #888",
+    borderRadius: "8px",
+    padding: "15px",
+    marginTop: "15px",
+  },
 };
 
 function App() {
-return (
-&lt;div&gt;
-&lt;h1 style={{ textAlign: &quot;center&quot; }}&gt;React Data Sharing Example&lt;/h1&gt;
-&lt;Parent /&gt;
-&lt;/div&gt;
-);
+  return (
+    <div>
+      <h1 style={{ textAlign: "center" }}>React Data Sharing Example</h1>
+      <Parent />
+    </div>
+  );
 }
 export default App;
